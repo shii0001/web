@@ -4526,27 +4526,12 @@ var axios_1 = __importDefault(require("axios"));
 var User = /** @class */function () {
   function User(data) {
     this.data = data;
-    this.events = {};
   }
   User.prototype.get = function (propName) {
     return this.data[propName];
   };
   User.prototype.set = function (update) {
     Object.assign(this.data, update);
-  };
-  User.prototype.on = function (eventName, callback) {
-    var handlers = this.events[eventName] || [];
-    handlers.push(callback);
-    this.events[eventName] = handlers;
-  };
-  User.prototype.trigger = function (eventName) {
-    var handlers = this.events[eventName];
-    if (!handlers || handlers.length === 0) {
-      return;
-    }
-    handlers.forEach(function (callback) {
-      callback();
-    });
   };
   User.prototype.fetch = function () {
     var _this = this;
@@ -4555,11 +4540,12 @@ var User = /** @class */function () {
     });
   };
   User.prototype.save = function () {
-    if (this.get('id')) {
+    var id = this.get('id');
+    if (id) {
       //put
-      axios_1.default.put("http://localhost:3000/users/".concat(this.get('id')));
+      axios_1.default.put("http://localhost:3000/users/".concat(id), this.data);
     } else {
-      // post
+      axios_1.default.post('http://localhost:3000/users', this.data);
     }
   };
   return User;
@@ -4573,12 +4559,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 var User_1 = require("./models/User");
 var user = new User_1.User({
-  id: 1
+  name: 'new record',
+  age: 0
 });
-user.fetch();
-setTimeout(function () {
-  console.log(user);
-}, 4000);
+user.save();
 },{"./models/User":"src/models/User.ts"}],"../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
