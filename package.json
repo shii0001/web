@@ -1,7 +1,6 @@
 {
   "name": "web",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start:db": "json-server -w db.json",
@@ -9,5 +8,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shii0001/web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shii0001/web/issues"
+  },
+  "homepage": "https://github.com/shii0001/web#readme",
+  "description": ""
 }
